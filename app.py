@@ -8,11 +8,11 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from langgraph.graph import StateGraph, END
 from typing import TypedDict, Optional
 
-llm = ChatGroq(
-    api_key="GROQ_API_KEY",
-    model_name="llama-3.3-70b-versatile"
-)
-
+def get_llm():
+    return ChatGroq(
+        api_key=os.getenv("GROQ_API_KEY"),
+        model_name="llama-3.3-70b-versatile"
+    )
 # ── State ──────────────────────────────────────────────
 class DocumentState(TypedDict):
     document_text: str
@@ -24,7 +24,7 @@ class DocumentState(TypedDict):
 
 # ── Agents ─────────────────────────────────────────────
 def classifier_agent(state: DocumentState) -> DocumentState:
-    response = llm.invoke([
+    response = get_llm().invoke ([
         SystemMessage(content="You are a legal document classifier. Identify the type of Indian legal document."),
         HumanMessage(content=f"Classify this document in 1 line:\n{state['document_text'][:1000]}")
     ])
@@ -32,7 +32,7 @@ def classifier_agent(state: DocumentState) -> DocumentState:
     return state
 
 def risk_analyzer_agent(state: DocumentState) -> DocumentState:
-    response = llm.invoke([
+    response = get_llm().invoke ([
         SystemMessage(content="""You are an Indian legal risk analyzer. 
         Find risky clauses, unfair terms, and red flags in the document.
         Format your response with clear sections and bullet points.
@@ -44,7 +44,7 @@ def risk_analyzer_agent(state: DocumentState) -> DocumentState:
 
 def explainer_agent(state: DocumentState) -> DocumentState:
     lang_instruction = "Explain in both Hindi and English" if state["language"] == "Hindi + English" else f"Explain in {state['language']}"
-    response = llm.invoke([
+    response = get_llm().invoke([
         SystemMessage(content=f"""You are a legal document explainer for common Indians.
         {lang_instruction}. Use very simple words.
         Break down complex legal jargon into easy language."""),
@@ -54,7 +54,7 @@ def explainer_agent(state: DocumentState) -> DocumentState:
     return state
 
 def action_advisor_agent(state: DocumentState) -> DocumentState:
-    response = llm.invoke([
+    response = get_llm().invoke([
         SystemMessage(content="""You are a legal action advisor for Indians.
         Based on the document, suggest practical next steps.
         Always add disclaimer that this is not legal advice.
