@@ -18,21 +18,21 @@ NyayaMitra uses a **4-agent LangGraph pipeline:**
 
 | Agent | Role |
 |-------|------|
-| 🔍 Classifier Agent | Identifies the type of legal document |
-| 🚨 Risk Analyzer Agent | Flags risky clauses & unfair terms with Indian law references |
-| 💬 Explainer Agent | Explains document in simple Hindi / English / Both |
-| ✅ Action Advisor Agent | Suggests practical next steps |
+|  Classifier Agent | Identifies the type of legal document |
+|  Risk Analyzer Agent | Flags risky clauses & unfair terms with Indian law references |
+|  Explainer Agent | Explains document in simple Hindi / English / Both |
+|  Action Advisor Agent | Suggests practical next steps |
 
 ---
 
 ## ✨ Features
 
-- 📄 Upload PDF or TXT legal documents
-- 🔍 Auto-identifies document type
-- 🚨 Flags risky and unfair clauses with relevant Indian laws
-- 💬 Plain language explanation in Hindi, English, or both
-- ✅ Actionable next steps
-- 🌐 Supports rent agreements, FIRs, contracts, affidavits & more
+-  Upload PDF or TXT legal documents
+-  Auto-identifies document type
+-  Flags risky and unfair clauses with relevant Indian laws
+-  Plain language explanation in Hindi, English, or both
+-  Actionable next steps
+-  Supports rent agreements, FIRs, contracts, affidavits & more
 
 ---
 
